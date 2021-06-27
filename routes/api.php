@@ -23,5 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/ideen', [IdeenController::class, 'index']);
-Route::post('/ideen/create', [IdeenController::class, 'create']);
+Route::middleware('auth:sanctum')->get('/ideen', [IdeenController::class, 'index']);
+Route::middleware('auth:sanctum')->post('/ideen/create', [IdeenController::class, 'create']);
