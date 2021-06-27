@@ -9,4 +9,13 @@ class Ideen extends Model
 {
     use HasFactory;
     protected $table = 'ideen';
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'titel',
+        'description',
+        'categorie',
+        'user_id'
+    ];
 }
