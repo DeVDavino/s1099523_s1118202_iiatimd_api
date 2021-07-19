@@ -25,5 +25,26 @@ class IdeenController extends Controller
         $ideen = DB::table('ideen')->where('user_id', '=', $user_id)->get();
         return $ideen;
     }
+
+    public function update(Request $request){
+        var_dump($request->id);
+        $idee = Ideen::where('id', $request->id)->first();
+        $idee->titel = $request->titel;
+        $idee->description = $request->description;
+        $idee->categorie = $request->categorie;
+        try {
+            $idee->save();
+            return true;
+        } catch (Exception $e) {
+            return redirect('/ideen');
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        $idee = Ideen::where('id', $request->id)->first();
+        $idee->delete();
+        return "Het idee is succesvol verwijderd";
+    }
     
 }
