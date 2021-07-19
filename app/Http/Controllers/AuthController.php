@@ -22,10 +22,19 @@ class AuthController extends Controller
     
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['Dit email is niet bekend bij ons :('],
+                'email' => ['Het email of wachtwoord is fout'],
             ]);
         }
     
         return $user->createToken($request->device_name)->plainTextToken;
+    }
+
+    public function register(Request $request)
+    {
+        return User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
     }
 }
