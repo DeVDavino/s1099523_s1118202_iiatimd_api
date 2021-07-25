@@ -26,9 +26,9 @@ class IdeenController extends Controller
         return $ideen;
     }
 
-    public function update(Request $request){
-        var_dump($request->id);
-        $idee = Ideen::where('id', $request->id)->first();
+    public function update($id, Request $request){
+        var_dump($id);
+        $idee = Ideen::where('id', $id)->first();
         $idee->titel = $request->titel;
         $idee->description = $request->description;
         $idee->categorie = $request->categorie;
@@ -40,9 +40,9 @@ class IdeenController extends Controller
         }
     }
 
-    public function delete(Request $request)
+    public function delete($id)
     {
-        $idee = Ideen::where('id', $request->id)->first();
+        $idee = Ideen::where('id', $id)->first();
         $idee->delete();
         return "Het idee is succesvol verwijderd";
     }
